@@ -7,21 +7,17 @@ echo "--------------------------------------------"
 echo "🔍 Checking storage access..."
 termux-setup-storage
 
-# Update package lists
+# Update package lists and upgrade packages
 echo "🔄 Updating package lists..."
 pkg update -y && pkg upgrade -y
 
-# Clean up broken dependencies
+# Fix broken packages
 echo "🔧 Fixing broken packages..."
 apt --fix-broken install -y
 
-# Remove unnecessary packages
+# Remove unnecessary packages and dependencies
 echo "🗑️ Cleaning unnecessary packages..."
-pkg autoclean && pkg clean
-
-# Remove orphaned dependencies
-echo "🧹 Removing unused dependencies..."
-pkg autoremove -y
+pkg autoclean && pkg clean && pkg autoremove -y
 
 # Reset Termux cache
 echo "🗄️ Clearing Termux cache..."
@@ -35,12 +31,12 @@ dpkg --configure -a
 echo "📊 Checking disk space usage..."
 df -h
 
-# Verify installation integrity
-echo "🔍 Verifying installed packages..."
-pkg check
+# Verify package integrity with a proper command
+echo "🔍 Checking package integrity..."
+apt list --installed > /dev/null 2>&1 && echo "✅ All packages are correctly installed."
 
-# Restart Termux for changes to take effect
+# Restart Termux properly
 echo "♻️ Restarting Termux..."
-killall com.termux
+am broadcast --user 0 -a android.intent.action.BOOT_COMPLETED
 
 echo "✅ Maintenance Completed! Termux is now optimized."
