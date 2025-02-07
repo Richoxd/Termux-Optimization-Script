@@ -1,3 +1,5 @@
+☕ Like my work? Buy me a coffee! → [paypal.me/RichCabo](https://paypal.me/RichCabo)
+
 Termux Maintenance Script
 
 A fully automated script that scans, updates, repairs, cleans, and optimizes Termux for flawless performance.
